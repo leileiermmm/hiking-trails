@@ -256,6 +256,72 @@
   .dot-hard { background: #e05555; }
 
   /* ── Trail List ── */
+
+  .weather-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .weather-date {
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text);
+    background: #f8faf6;
+    font-family: inherit;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  .weather-panel .weather-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.4px;
+    flex-shrink: 0;
+  }
+  .weather-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    border: none;
+  }
+  .weather-chip.w-sun  { background: #fef9e7; }
+  .weather-chip.w-cloud { background: #f0f4f0; }
+  .weather-chip.w-rain { background: #eaf2fa; }
+  .weather-chip.w-storm { background: #f0e8f0; }
+  .weather-chip .w-city {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .weather-chip .w-temp {
+    font-weight: 650;
+    color: var(--text);
+  }
+  .weather-chip .w-rain {
+    font-size: 11px;
+    color: #4a90d9;
+  }
+  .weather-chip .w-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .weather-error {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
   .trail-list {
     display: flex;
     flex-direction: column;
@@ -302,11 +368,6 @@
     color: var(--text-secondary);
     flex-shrink: 0;
     letter-spacing: 0.3px;
-  }
-  .trail-card .location {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
   }
 
   .trail-card .metrics {
@@ -368,6 +429,15 @@
   }
 
 
+
+  .tag-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .feature-tags { margin-top: 0 !important; }
   .feature-tags {
     display: flex;
     flex-wrap: wrap;
@@ -411,8 +481,8 @@
   .toggle-chip.toggle-hard.active { background: #e05555; }
   .toggle-chip.toggle-province.active { background: #3a5c40; color: #e8f0e4; border-color: #3a5c40; }
   /* Multi-select dropdown */
-  .multi-select { position: relative; }
-  .multi-select-trigger {
+  .city-select { position: relative; }
+  .city-trigger {
     height: 38px;
     padding: 0 30px 0 12px;
     border-radius: 7px;
@@ -423,53 +493,47 @@
     cursor: pointer;
     font-family: inherit;
     text-align: left;
-    min-width: 130px;
+    min-width: 120px;
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239e9890' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
     transition: border-color 0.15s;
   }
-  .multi-select-trigger:focus { border-color: var(--leaf-green); box-shadow: 0 0 0 3px rgba(74,140,92,0.12); outline: none; background: #fff; }
-  .multi-select-dropdown {
+  .city-trigger:focus { border-color: var(--leaf-green); box-shadow: 0 0 0 3px rgba(74,140,92,0.12); outline: none; background: #fff; }
+  .city-drop {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 100%; left: 0;
     margin-top: 4px;
     background: #fff;
     border: 1px solid var(--border);
     border-radius: 8px;
     box-shadow: var(--shadow-md);
     z-index: 100;
-    min-width: 180px;
-    max-height: 260px;
+    min-width: 120px;
+    max-height: 220px;
     overflow-y: auto;
-    padding: 4px 0;
+    padding: 1px 0;
   }
-  .multi-select-dropdown.open { display: block; }
-  .multi-select-option {
+  .city-drop.open { display: block; }
+  .city-opt {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 7px 14px;
+    gap: 0;
+    padding: 4px 10px;
     font-size: 13px;
     cursor: pointer;
-    transition: background 0.1s;
     color: var(--text);
+    white-space: nowrap;
   }
-  .multi-select-option:hover { background: #f7f6f4; }
-  .multi-select-option input[type="checkbox"] {
-    width: 15px; height: 15px;
-    accent-color: var(--leaf-green);
-    margin: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
+  .city-opt > * { margin: 0 !important; padding: 0 !important; }
+  .city-opt > span { padding-left: 3px !important; }
+  .city-opt:hover { background: #f0ede8; }
+  .city-opt input { margin: 0; flex-shrink: 0; accent-color: var(--leaf-green); width: 13px; height: 13px; }
 
   .empty {
     text-align: center;
@@ -496,8 +560,9 @@
     .filter-group.range-group input { width: 50%; }
     .search-row { padding: 10px 16px; }
     .search-row input { height: 40px; font-size: 16px; }
-    .multi-select-trigger { max-width: 100%; width: 100%; }
-    .multi-select-dropdown { min-width: 100%; }
+    .weather-panel { gap: 8px; padding: 10px 12px; }
+    .city-trigger { max-width: 100%; width: 100%; }
+    .city-drop { min-width: 100%; }
     .trail-card {
       flex-direction: column;
       align-items: flex-start;
@@ -542,9 +607,9 @@
       </div>
       <div class="filter-group">
         <label>城市</label>
-        <div class="multi-select" id="city-multi">
-          <button class="multi-select-trigger" id="city-trigger" type="button">全部城市</button>
-          <div class="multi-select-dropdown" id="city-dropdown"></div>
+        <div class="city-select" id="city-wrap">
+          <button class="city-trigger" id="city-trigger" type="button">全部城市</button>
+          <div class="city-drop" id="city-drop"></div>
         </div>
       </div>
       <div class="filter-group">
@@ -582,6 +647,14 @@
 
   <!-- Stats row -->
   <div class="stats-row" id="statsRow"></div>
+
+
+  <!-- Weather -->
+  <div class="weather-panel" id="weatherPanel" style="display:none;">
+    <span class="weather-label">🌤 天气</span>
+    <input type="date" class="weather-date" id="weatherDate">
+    <span id="weatherContent" class="weather-error">加载中…</span>
+  </div>
 
   <!-- Trail list -->
   <div class="trail-list" id="trailList"></div>
@@ -694,7 +767,7 @@ const DIFF_CLASS = { easy: "badge-easy", medium: "badge-medium", hard: "badge-ha
 const MAX_ELEV = Math.max(...trails.map(t => t.elevation));
 
 function getSelectedCities() {
-  const checks = document.querySelectorAll("#city-dropdown input[type=checkbox]:checked");
+  const checks = document.querySelectorAll("#city-drop input:checked");
   return Array.from(checks).map(cb => cb.value);
 }
 function getSelectedDifficulties() {
@@ -741,6 +814,63 @@ function getFiltered() {
   return result;
 }
 
+
+// ── Weather ──
+const CITY_COORDS = {
+  "上海": [31.23,121.47], "苏州": [31.30,120.62], "无锡": [31.57,120.29],
+  "常州": [31.81,119.97], "南京": [32.06,118.80], "镇江": [32.19,119.43],
+  "扬州": [32.39,119.42], "南通": [31.98,120.89], "连云港": [34.60,119.22],
+  "杭州": [30.27,120.15], "湖州": [30.87,120.09], "绍兴": [30.03,120.58],
+  "宁波": [29.87,121.55], "温州": [28.00,120.70], "台州": [28.66,121.42],
+  "金华": [29.08,119.65], "丽水": [28.45,119.92], "舟山": [30.02,122.11],
+  "衢州": [28.97,118.87], "嘉兴": [30.77,120.75]
+};
+const W_ICONS = {0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",51:"🌦️",53:"🌦️",55:"🌧️",61:"🌧️",63:"🌧️",65:"🌧️",71:"🌨️",73:"🌨️",75:"🌨️",80:"🌦️",81:"🌧️",82:"🌧️",95:"⛈️",96:"⛈️",99:"⛈️"};
+
+async function fetchWeather() {
+  const panel = document.getElementById("weatherPanel");
+  const content = document.getElementById("weatherContent");
+  const dateInput = document.getElementById("weatherDate");
+  const selCities = getSelectedCities();
+  if (!selCities.length) { panel.style.display = "none"; return; }
+  const cities = selCities.filter(c => CITY_COORDS[c]);
+  if (!cities.length) { panel.style.display = "none"; return; }
+
+  panel.style.display = "flex";
+  content.innerHTML = "加载中…";
+  const date = dateInput.value; // YYYY-MM-DD
+
+  try {
+    const chunks = [];
+    for (let i = 0; i < cities.length; i += 5) {
+      const batch = cities.slice(i, i + 5);
+      const lat = batch.map(c => CITY_COORDS[c][0]).join(",");
+      const lon = batch.map(c => CITY_COORDS[c][1]).join(",");
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code&timezone=Asia/Shanghai&start_date=${date}&end_date=${date}`;
+      const resp = await fetch(url);
+      const data = await resp.json();
+      const results = Array.isArray(data) ? data : [data];
+      results.forEach((r, idx) => {
+        const c = batch[idx];
+        const day = r.daily;
+        const icon = W_ICONS[day.weather_code[0]] || "🌡️";
+        const hi = Math.round(day.temperature_2m_max[0]);
+        const lo = Math.round(day.temperature_2m_min[0]);
+        const rain = day.precipitation_sum[0] || 0;
+        const wcode = day.weather_code[0];
+        let wClass = "w-sun";
+        if (wcode >= 51 && wcode <= 82) wClass = "w-rain";
+        else if (wcode >= 2 && wcode <= 48) wClass = "w-cloud";
+        else if (wcode >= 95) wClass = "w-storm";
+        chunks.push('<span class="weather-chip '+wClass+'"><span class="w-icon">'+icon+'</span><span class="w-city">'+c+'</span><span class="w-temp">'+lo+'~'+hi+'°C</span>'+(rain > 0 ? '<span class="w-rain">💧'+rain.toFixed(1)+'mm</span>' : '')+'</span>');
+      });
+    }
+    content.innerHTML = chunks.join("");
+  } catch(e) {
+    content.innerHTML = "天气暂不可用";
+  }
+}
+
 function renderStats(results) {
   const easy = results.filter(t => t.difficulty === "easy").length;
   const medium = results.filter(t => t.difficulty === "medium").length;
@@ -765,6 +895,7 @@ function metricIcon(name) {
 function render() {
   const results = getFiltered();
   renderStats(results);
+  fetchWeather();
   const list = document.getElementById("trailList");
   if (results.length === 0) {
     list.innerHTML = `<div class="empty"><i data-lucide="search-x" stroke-width="1.5"></i><br>没有匹配的路线，试试调整筛选条件</div>`;
@@ -776,10 +907,11 @@ function render() {
       <div class="info">
         <div style="min-width:0;">
           <div class="name">${t.name}</div>
-          <div class="location">${t.location}</div>
-          ${t.features && t.features.length ? '<div class="feature-tags">' + t.features.map(f => '<span class="feature-tag">' + f + '</span>').join('') + '</div>' : ''}
+          <div class="tag-row">
+            ${t.features && t.features.length ? '<div class="feature-tags">' + t.features.map(f => '<span class="feature-tag">' + f + '</span>').join('') + '</div>' : ''}
+            <span class="province-tag">${t.province}·${t.city}</span>
+          </div>
         </div>
-        <span class="province-tag">${t.province}·${t.city}</span>
       </div>
       <div class="metrics">
         <div class="metric">
@@ -844,11 +976,11 @@ document.querySelectorAll("#difficulty-toggles .toggle-chip").forEach(btn => {
 // City multi-select
 document.getElementById("city-trigger").addEventListener("click", function(e) {
   e.stopPropagation();
-  document.getElementById("city-dropdown").classList.toggle("open");
+  document.getElementById("city-drop").classList.toggle("open");
 });
 document.addEventListener("click", function(e) {
-  if (!document.getElementById("city-multi").contains(e.target)) {
-    document.getElementById("city-dropdown").classList.remove("open");
+  if (!document.getElementById("city-wrap").contains(e.target)) {
+    document.getElementById("city-drop").classList.remove("open");
   }
 });
 
@@ -856,34 +988,32 @@ document.addEventListener("click", function(e) {
 function updateCityOptions() {
   const provs = getSelectedProvinces();
   const cities = [...new Set(trails.filter(t => !provs.length || provs.includes(t.province)).map(t => t.city))].sort();
-  const dropdown = document.getElementById("city-dropdown");
-  const trigger = document.getElementById("city-trigger");
-  // Save current selection
-  const currentSelected = getSelectedCities();
-  dropdown.innerHTML = cities.map(c => {
-    const checked = currentSelected.includes(c) ? ' checked' : '';
-    return `<label class="multi-select-option"><input type="checkbox" value="${c}"${checked}><span>${c}</span></label>`;
-  }).join('');
-  // Rebind checkbox events
-  dropdown.querySelectorAll("input[type=checkbox]").forEach(cb => {
-    cb.addEventListener("change", function() {
-      updateCityTrigger();
-      render();
-    });
+  const drop = document.getElementById("city-drop");
+  const current = getSelectedCities();
+  let h = '';
+  cities.forEach(c => {
+    const ch = current.includes(c) ? ' checked' : '';
+    h += '<label class="city-opt"><input type="checkbox" value="' + c + '"' + ch + '><span>' + c + '</span></label>';
+  });
+  drop.innerHTML = h;
+  // Rebind events
+  drop.querySelectorAll("input").forEach(cb => {
+    cb.addEventListener("change", function() { updateCityTrigger(); render(); });
   });
   updateCityTrigger();
 }
 function updateCityTrigger() {
   const selected = getSelectedCities();
-  const trigger = document.getElementById("city-trigger");
-  if (selected.length === 0) {
-    trigger.textContent = "全部城市";
-  } else if (selected.length <= 2) {
-    trigger.textContent = selected.join("、");
-  } else {
-    trigger.textContent = selected.length + " 个城市";
-  }
+  const t = document.getElementById("city-trigger");
+  if (!selected.length) t.textContent = "全部城市";
+  else if (selected.length <= 2) t.textContent = selected.join("、");
+  else t.textContent = selected.length + " 个城市";
 }
+
+
+// Set today as default date
+document.getElementById("weatherDate").value = new Date().toISOString().split("T")[0];
+document.getElementById("weatherDate").addEventListener("change", fetchWeather);
 
 updateCityOptions();
 render();
