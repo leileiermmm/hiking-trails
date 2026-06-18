@@ -117,7 +117,7 @@
 
   .search-row {
     padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
   }
   .search-row input {
     width: 100%;
@@ -493,8 +493,8 @@
     cursor: pointer;
     font-family: inherit;
     text-align: left;
-    min-width: 120px;
-    max-width: 150px;
+    min-width: 100px;
+    max-width: 130px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -514,7 +514,7 @@
     border-radius: 8px;
     box-shadow: var(--shadow-md);
     z-index: 100;
-    min-width: 120px;
+    min-width: 100px;
     max-height: 220px;
     overflow-y: auto;
     padding: 1px 0;
@@ -524,16 +524,15 @@
     display: flex;
     align-items: center;
     gap: 0;
-    padding: 4px 10px;
-    font-size: 13px;
+    padding: 3px 8px;
+    font-size: 12px;
     cursor: pointer;
     color: var(--text);
     white-space: nowrap;
   }
-  .city-opt > * { margin: 0 !important; padding: 0 !important; }
-  .city-opt > span { padding-left: 3px !important; }
+  .city-opt > span { margin-left: 1px; }
   .city-opt:hover { background: #f0ede8; }
-  .city-opt input { margin: 0; flex-shrink: 0; accent-color: var(--leaf-green); width: 13px; height: 13px; }
+  .city-opt input { margin: 0; padding: 0; flex-shrink: 0; accent-color: var(--leaf-green); width: 13px; height: 13px; min-width: 13px; max-width: 13px; }
 
   .empty {
     text-align: center;
@@ -593,9 +592,6 @@
 
   <!-- Filters -->
   <div class="filters-wrap">
-    <div class="search-row">
-      <input type="text" id="search" placeholder="搜索路线名称或地点…" autocomplete="off">
-    </div>
     <div class="filters" id="filters">
       <div class="filter-group">
         <label>省份</label>
@@ -642,6 +638,9 @@
       <div class="filter-actions">
         <button class="btn" onclick="resetFilters()"><i data-lucide="rotate-ccw"></i>重置</button>
       </div>
+    </div>
+    <div class="search-row">
+      <input type="text" id="search" placeholder="搜索路线名称或地点…" autocomplete="off">
     </div>
   </div>
 
